@@ -3,7 +3,7 @@
   "id": "agent-awake-display-off",
   "name": "Agent Awake, Display Off",
   "version": "1.1.0",
-  "description": "Keeps the computer from suspending while it should stay awake, while letting the display turn off. Click the status item to cycle On / Agent / Off, or set the mode in Settings.",
+  "description": "Keeps the machine awake while letting the display turn off: it holds a logind sleep inhibitor, not a display blocker. Linux only — it uses systemd-inhibit, so macOS and Windows show Awake: n/a.",
   "license": "MIT",
   "engines": {
     "orca": ">=1.4.248"
