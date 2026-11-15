@@ -1,0 +1,80 @@
+{
+  "manifestVersion": 2,
+  "id": "agent-awake-display-off",
+  "name": "Agent Awake, Display Off",
+  "version": "1.1.0",
+  "description": "Keeps the computer from suspending while it should stay awake, while letting the display turn off. Click the status item to cycle On / Agent / Off, or set the mode in Settings.",
+  "license": "MIT",
+  "engines": {
+    "orca": ">=1.4.248"
+  },
+  "execution": "trusted-worker",
+  "pluginApi": 1,
+  "main": "src/worker.ts",
+  "contributes": {
+    "events": [
+      {
+        "on": "agent.status.changed"
+      }
+    ],
+    "settings": [
+      {
+        "key": "mode",
+        "title": "Keep awake mode",
+        "description": "On: always hold a sleep inhibitor. Agent: only while an agent is working. Off: let the computer sleep normally. The display can turn off in every mode.",
+        "type": "string",
+        "enum": [
+          "on",
+          "agent",
+          "off"
+        ],
+        "enumLabels": [
+          "On",
+          "Agent",
+          "Off"
+        ],
+        "default": "agent"
+      }
+    ],
+    "commands": [
+      {
+        "id": "agent-awake-display-off.cycle",
+        "title": "Agent Awake: Switch Mode (On, Agent, Off)"
+      },
+      {
+        "id": "agent-awake-display-off.set-on",
+        "title": "Agent Awake: Always Keep Awake (On)"
+      },
+      {
+        "id": "agent-awake-display-off.set-agent",
+        "title": "Agent Awake: Keep Awake While Agents Work (Agent)"
+      },
+      {
+        "id": "agent-awake-display-off.set-off",
+        "title": "Agent Awake: Allow Sleep (Off)"
+      },
+      {
+        "id": "agent-awake-display-off.refresh",
+        "title": "Agent Awake: Re-check Now"
+      }
+    ],
+    "statusBarItems": [
+      {
+        "id": "agent-awake-status",
+        "text": "Awake: Agent",
+        "icon": "pause",
+        "tone": "neutral",
+        "tooltip": "Agent Awake: Agent mode — no agent is working. Click to switch to Off.",
+        "command": "agent-awake-display-off.cycle"
+      }
+    ]
+  },
+  "capabilities": [
+    {
+      "kind": "agent:read"
+    },
+    {
+      "kind": "settings:own"
+    }
+  ]
+}
